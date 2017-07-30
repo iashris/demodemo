@@ -1,0 +1,126 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
+  <script language="javascript" type="text/javascript" src="libraries/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/p5.dom.min.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/scenemanager.js"></script>
+  <script language="javascript" type="text/javascript" src="Site.js"></script>
+  <script language="javascript" type="text/javascript" src="Bubbles.js"></script>
+  <script language="javascript" type="text/javascript" src="website2.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:600|Poppins" rel="stylesheet">
+  <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
+
+  <!-- This line removes any default padding and style. 
+       You might only need one of these values set. -->
+       <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <style> 
+body {padding-right: 0!important; padding-left:0!important;margin: 0;overflow-x:hidden;background:#ff4242;} 
+
+  #maincancas{
+  height: 100vh;
+  padding: 0;
+
+}
+input{
+  max-width: 10vw;
+}
+#controlbar{
+  height:100vh;
+  background: #ff4242;
+  padding: 10vh 0vw;
+}
+button{
+  padding:10px 30px;
+  background:none;
+  color: #222;
+  border: 2px solid black;
+  font-family: Poppins,Helvetica;
+  font-size: 1.15em;
+  display: inline-block;
+
+
+}
+button:hover{
+  cursor: pointer;
+  background:black;
+  color:white;
+  transition:0.8s;
+}
+
+#logo{
+  position: absolute;
+  top:12px;
+  font-size: 1.2em;
+  font-family: 'Montserrat';
+  color: #222;
+  left:20px;
+}
+.btngrp{
+    margin-top:10vh;
+}
+#footer{
+  position: absolute;
+  bottom:12px;
+  font-size: 1em;
+  font-family: 'Poppins';
+  color: #222;
+  left:20px;
+}
+h2{
+  font-family: 'Montserrat';
+  text-align: center;
+}
+.intro{
+  font-family: 'Poppins';
+  padding: 0px 25px;
+  text-align: justify;
+}
+.centah{
+  text-align: center;
+}
+button:focus{
+  outline: none;
+}
+#reset{
+  display: none;
+}
+#proceed{
+  display: inline-block;
+}
+.selbol{
+  background:black;
+  color:white;
+}
+#magic{
+  overflow: auto;
+  max-width: 100%;
+}
+.numcounter{
+  max-width:3vw;
+}
+
+</style>
+</head>
+
+<body>
+  
+  <div id="controlbar" class="col-md-4">
+
+    <h2 id="hdtxt">PLANNIO</h2>
+    <p class="intro" id="cntxt">Architectural planning is an abstract process. It happens through a series of iterations, some driven by logic and some by instincts. Traditional CAD tools like AutoCAD are Revit are useful for representing a precise design. However most of the non-precise, or the abstract part is done by the architect on pen and paper.<br> Plannio is designed to be a nifty tool to be used by an architect for quick ideation before the plannig process. The computer doesn't just help you represent the design but also participates in the design process by offering you hints and guides.</p>
+    <div id='magic'></div>
+    <div class="centah btngrp">
+    <button onclick="reset();" id="reset">Reset</button>
+    <button onclick="next();" id="proceed">Proceed</button></div>
+  </div>
+
+  <div id="logo">PLANNIO</div>
+
+<div id="maincancas" class="col-md-8"></div>
+
+</body>
+</html>
