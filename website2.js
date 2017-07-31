@@ -304,7 +304,7 @@ function Animation5()
     this.setup=function() {
    mgr.mode=true;mgr.xray=false;
   document.getElementById('hdtxt').innerHTML = "Step #4 :<br> God Mode";
-  document.getElementById('cntxt').innerHTML = "Adjust the values in the corelation grids below to affect the simulation in the right.<br><br><div class='centah'><button id='zonex' onclick='zonex();'>Zone Grid</button> <button id='spacex' onclick='spacex();'>Space Grid</button></div>";
+  document.getElementById('cntxt').innerHTML = "Now that the boring part is done, let's unleash the power of Plannio. Adjust the values in the corelation grids below to affect the simulation in the right. Positive values indicate attraction and negative indicate repulsion.<br><br><div class='centah'><button id='zonex' onclick='zonex();'>Zone Grid</button> <button id='spacex' onclick='spacex();'>Space Grid</button></div>";
   document.getElementById('reset').style.display="none";
   document.getElementById('proceed').style.display="none";
   cursor(CROSS);
