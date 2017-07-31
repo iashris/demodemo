@@ -5,7 +5,9 @@ var mgr;
     if(spnam=="" || spar==""){alert('Empty fields not allowed.');return;}
     mgr.spaces.addBubbleToScreen(spar,spnam);
     $('#lastone').before('<tr><td>'+spnam+'</td><td>'+spar+'</td><td><span onclick="removeroom(this);">Remove</span></td></tr>');
-    $('#spnam').text("");$('#spar').text("");
+    var sp=["Bedroom","Bathroom","Kitchen","Dining","Drawing","Guest","Lobby","Parking","Bedroom","Storage","Lift","Terrace","Garden"];
+    var lk=parseInt(Math.random()*sp.length);
+    $('#spnam').val(sp[lk]);$('#spar').val(parseInt(Math.random()*50));
 
    }
    function removeroom(a){
@@ -59,7 +61,7 @@ function spacex(){
     var e=mgr.spaces.bubbles[i].nam;
     jig+="<tr><td>"+e+"</td>";
     for(var j=0;j<mgr.spaces.bubbles.length;j++){
-      if(j>=i)jig+="<td></td>";
+      if(j>=i)jig+="<td><input class='numcounter sscow blacked' data-spacerow="+i+" data-spacecol="+j+" type='number' value='"+mgr.spacespace[i][j]+"'></td>";
       else jig+="<td><input class='numcounter sscow' data-spacerow="+i+" data-spacecol="+j+" type='number' value='"+mgr.spacespace[i][j]+"'></td>";
     }
     jig+="</tr>";
@@ -72,6 +74,7 @@ function spacex(){
     var v=$(this).val();
     mgr.spacespace[i][j]=v;
     mgr.spacespace[j][i]=v;
+    $('.sscow[data-spacerow="'+j+'"][data-spacecol="'+i+'"]').val(v);
 });
 
 $("th").each(function(){$(this).height($(this).width())})
@@ -254,12 +257,14 @@ function Animation4()
    
   document.getElementById('hdtxt').innerHTML = "Step #3 :<br> Add Spaces";
   document.getElementById('cntxt').innerHTML = "Perfect. Now that we have our site, we need to add the spaces that will be placed here. <br><br><table id='myTable' class='table'>\
-    <thead><tr><th>Space</th><th>Area</th><th></th></tr></thead><tbody><tr id='lastone'><td><input id='spnam' type='text' value='Space Name'></td><td><input id='spar' type='number' value='20'></td><td><button onclick='addroom();'>+</button></td></tr>\
+    <thead><tr><th>Space</th><th>Area</th><th></th></tr></thead><tbody><tr id='lastone'><td><input id='spnam' type='text' value='Entry'></td><td><input id='spar' type='number' value='20'></td><td><button onclick='addroom();'>+</button></td></tr>\
     </tbody></table><br><button onclick='next();'>Proceed</button>";
   document.getElementById('reset').style.display="none";
   document.getElementById('proceed').style.display="none";
   cursor(CROSS);
   smooth();
+
+
 
 }
 
@@ -297,9 +302,9 @@ function Animation5()
 
 
     this.setup=function() {
-   
+   mgr.mode=true;mgr.xray=false;
   document.getElementById('hdtxt').innerHTML = "Step #4 :<br> God Mode";
-  document.getElementById('cntxt').innerHTML = "<div class='centah'><button id='zonex' onclick='zonex();'>Zone Grid</button> <button id='spacex' onclick='spacex();'>Space Grid</button></div>";
+  document.getElementById('cntxt').innerHTML = "Adjust the values in the corelation grids below to affect the simulation in the right.<br><br><div class='centah'><button id='zonex' onclick='zonex();'>Zone Grid</button> <button id='spacex' onclick='spacex();'>Space Grid</button></div>";
   document.getElementById('reset').style.display="none";
   document.getElementById('proceed').style.display="none";
   cursor(CROSS);
@@ -308,7 +313,7 @@ function Animation5()
   for(var i=0;i<mgr.spaces.bubbles.length;i++){
     var tempArr=[];
     for(var j=0;j<mgr.site.zones.length;j++){
-      tempArr.push(0);
+      tempArr.push(parseInt(random(-3,4)));
     }
     mgr.spacezone.push(tempArr);
   }
@@ -317,7 +322,7 @@ function Animation5()
   for(var i=0;i<mgr.spaces.bubbles.length;i++){
     var tempArr=[];
     for(var j=0;j<mgr.spaces.bubbles.length;j++){
-      tempArr.push(0);
+      tempArr.push(parseInt(random(0,3)));
     }
     mgr.spacespace.push(tempArr);
   }
@@ -338,14 +343,19 @@ this.draw=function() {
   //mgr.spaces.update();
   //mgr.spaces.render();
   mgr.site.simulate();
+  text("Press Space Bar to toggle between square and circular mode. Press X to toggle XRay mode.",width*0.3,height*0.9);
   
   //render points
   //render lines
 }
-    this.mouseClicked=function(){
-        console.log('Funciona callad')
-  //mgr.site.addZone(mouseX,mouseY);
 
+this.keyPressed=function(){
+if(key==" "){
+  mgr.mode=!mgr.mode;
+}
+if(key=="X"){
+  mgr.xray=!mgr.xray;
+}
 }
 
     this.next = function()
