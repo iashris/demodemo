@@ -67,6 +67,7 @@ var Site=function(){
     endShape();
     fill(0);textAlign(CENTER);noStroke();
     text("Site Area : "+this.area+ " sq units",sumx/this.points.length,sumy/this.points.length);
+    if(mgr.site.centrale==undefined)mgr.site.centrale=createVector(sumx/this.points.length,sumy/this.points.length);
     }
   }
 this.construction=function(){
@@ -172,6 +173,53 @@ this.reset=function(){
   this.area=0;
   this.marksi=100;
 }
+
+
+this.simulate=function(){
+stroke("#ff4242");strokeWeight(1);
+    for(var i=0;i<this.edges.length;i++){
+      var e=this.edges[i];
+      line(e.point1.x,e.point1.y,e.point2.x,e.point2.y);
+    }
+   
+    for(var i=0;i<this.zones.length;i++){
+      var z=this.zones[i];
+      noStroke();
+      fill(255,255,255,15);
+      ellipse(z.vec.x,z.vec.y,z.rad,z.rad);
+      fill(0);
+      text("Zone "+alphabets[i],z.vec.x,z.vec.y);
+    }
+
+
+    for(var i=0;i<mgr.spaces.bubblesfit.length;i++){
+    var e=mgr.spaces.bubblesfit[i];
+    var r=Math.sqrt(e.ar*mgr.site.scale*mgr.site.scale/PI);
+    var d=dist(mouseX,mouseY,e.loc.x,e.loc.y);
+    if(d<r){fill(80);e.onit=true;}
+    else {fill(255,0,0,100);e.onit=false;}
+    e.update();
+    ellipse(e.loc.x,e.loc.y,2*r,2*r);
+    fill(255);
+    textSize(18);
+    text(e.nam,e.loc.x,e.loc.y);
+    textSize(14);
+    text("Area : "+e.ar+" sq units",e.loc.x,e.loc.y+r*0.4);
+  }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
 }
 var Edge=function(point1,point2){
   console.log(point1,point2);

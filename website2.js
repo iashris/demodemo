@@ -59,7 +59,8 @@ function spacex(){
     var e=mgr.spaces.bubbles[i].nam;
     jig+="<tr><td>"+e+"</td>";
     for(var j=0;j<mgr.spaces.bubbles.length;j++){
-      jig+="<td><input class='numcounter sscow' data-spacerow="+i+" data-spacecol="+j+" type='number' value='"+mgr.spacespace[i][j]+"'></td>";
+      if(j>=i)jig+="<td></td>";
+      else jig+="<td><input class='numcounter sscow' data-spacerow="+i+" data-spacecol="+j+" type='number' value='"+mgr.spacespace[i][j]+"'></td>";
     }
     jig+="</tr>";
   }
@@ -70,9 +71,7 @@ function spacex(){
     var j=$(this).data("spacecol");
     var v=$(this).val();
     mgr.spacespace[i][j]=v;
-    mgr.spacespace[j][i]=v;  
-    $(".sscow[data-spacerow=" + j +"][data-spacecol="+i+"]").val(v);  
-
+    mgr.spacespace[j][i]=v;
 });
 
 $("th").each(function(){$(this).height($(this).width())})
@@ -322,8 +321,14 @@ function Animation5()
     }
     mgr.spacespace.push(tempArr);
   }
-  //zonex();
+  
 
+  for(var i=0;i<mgr.spaces.bubbles.length;i++){
+    var e=mgr.spaces.bubbles[i];
+    mgr.spaces.addBubble(e.ar,e.nam,e.id);
+  }
+
+zonex();
 
 
 }
@@ -332,27 +337,22 @@ this.draw=function() {
   background(0);
   //mgr.spaces.update();
   //mgr.spaces.render();
-  mgr.site.rendera();
-  mgr.site.constructiona();
+  mgr.site.simulate();
+  
   //render points
   //render lines
 }
     this.mouseClicked=function(){
         console.log('Funciona callad')
   //mgr.site.addZone(mouseX,mouseY);
-  return;
+
 }
 
     this.next = function()
     {
         this.sceneManager.showNextScene();
     }
-    this.keyPressed=function(){
-      if(keyCode==UP_ARROW)
-        mgr.site.marksi+=10;
-      if(keyCode==DOWN_ARROW)
-        mgr.site.marksi-=10;
-    }
+
 }
 
 function Animation3()
