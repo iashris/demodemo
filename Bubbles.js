@@ -4,32 +4,18 @@ var Bumblebee=function(){
 }
 
 Bumblebee.prototype.addBubbleToScreen=function(ar,nam){
-	var numberofbubbles=this.bubbles.length;
+
+
 	var r=Math.sqrt(ar*mgr.site.scale*mgr.site.scale/PI);
-	if(numberofbubbles==0)this.bubbles.push(new Bubble(createVector(random(r,width-r),random(r,height-r)),ar,nam,this.bubbles.length));
-	else{
-		var co=0;
-
-		while(true){
-			co++;
 			var vecca=createVector(random(r,width-r),random(r,height-r));
-			var score=1;
-			for(var j=0;j<numberofbubbles;j++){
-				var sel=this.bubbles[j];
-				var selr=Math.sqrt(sel.ar*mgr.site.scale*mgr.site.scale/PI);
-				if(dist(sel.loc.x,sel.loc.y,vecca.x,vecca.y)<selr+r)score=0;
-			}
-
-			if(score==1){
+		
 				this.bubbles.push(new Bubble(vecca,ar,nam,this.bubbles.length));
-				break;
-			}
+	
 
-			if(co>10000){alert('Overflow error. Program terminated. Reduce number of spaces or adjust area.');
-			break;}
+
 		}
 	
-	}
+	
 
 
 
@@ -38,7 +24,7 @@ Bumblebee.prototype.addBubbleToScreen=function(ar,nam){
 	// var vecca=createVector(random(width),random(height));
  //    if (inside(vecca,mgr.site.points)){this.bubbles.push(new Bubble(vecca,ar,nam,this.bubbles.length+1));break;}
  //    i++;
-}
+
 
 
 
@@ -138,7 +124,6 @@ Bubble.prototype.update=function(){
 				if(ss>0)stroke(255,255,0,50);
 				strokeWeight(Math.abs(ss));
 				if(ss!=0)line(bro.loc.x,bro.loc.y,this.loc.x,this.loc.y);
-
 			}
 
 		}
